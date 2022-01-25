@@ -1,0 +1,37 @@
+import random
+print("Enter the number of friends joining (including you):")
+n = int(input())
+if n <= 0:
+    print("No one is joining for the party")
+    exit()
+
+names = {}
+print("Enter the name of every friend (including you), each on a new line:")
+
+for _ in range(n):
+    name = input()
+    names[name] = 0
+
+print("Enter the total bill value:")
+bill = int(input())
+share = round((bill/n), 2)
+
+for name in names:
+    names.update({name : share})
+    
+print("Do you want to use the 'Who is lucky?' feature? Write Yes/No:")
+lucky = str(input())
+
+if lucky == "Yes":
+    lucky_one = random.choice(list(names))
+    print(lucky_one, "is the lucky one!")
+    
+    bill_share = round((bill/(n-1)), 2)
+    for name in names:
+        names.update({name : bill_share})
+    names[lucky_one] = 0
+    
+    print(names)
+else:
+    print("No one is going to be lucky")
+    print(names)    
